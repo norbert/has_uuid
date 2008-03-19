@@ -1,0 +1,7 @@
+= has_uuid
+
+This plugin makes assigning a UUID (1) to your models a breeze. It depends on the uuidtools (2) gem.
+
+
+(1):: http://en.wikipedia.org/wiki/Universally_Unique_Identifier
+(2):: http://sporkmonger.com/projects/uuidtools
