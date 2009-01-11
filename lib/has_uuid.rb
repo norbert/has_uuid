@@ -30,7 +30,7 @@ module ActiveRecord #:nodoc:
           class_eval do
             send :include, InstanceMethods # hide include from RDoc
 
-            before_validation :assign_uuid, :on => :create
+            before_validation_on_create :assign_uuid
 
             write_inheritable_attribute :uuid_generator, options[:generator]
             write_inheritable_attribute :uuid_column, options[:column]
