@@ -44,6 +44,11 @@ module ActiveRecord #:nodoc:
             uuid = UUID.send("#{self.class.read_inheritable_attribute(:uuid_generator)}_create").to_s
             send("#{self.class.read_inheritable_attribute(:uuid_column)}=", uuid)
           end
+        
+          def assign_uuid!
+            assign_uuid
+            save!
+          end
       end
     end
   end

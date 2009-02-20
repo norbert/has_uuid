@@ -11,6 +11,14 @@ class HasUuidTest < Test::Unit::TestCase
     @widget.assign_uuid
     assert_nothing_raised { UUID.parse(@widget.uuid) }
   end
+  
+  def test_method_assign_uuid!
+    @widget = Widget.new
+    @widget.assign_uuid!
+    @widget.reload
+    assert_nothing_raised { UUID.parse(@widget.uuid) }
+  end
+  
   def test_should_assign_uuid_on_create
     @widget = Widget.new
     assert_nil @widget.uuid
