@@ -41,6 +41,7 @@ module ActiveRecord #:nodoc:
       module InstanceMethods #:nodoc:
         private
           def assign_uuid
+            return unless uuid.blank?
             uuid = UUID.send("#{self.class.read_inheritable_attribute(:uuid_generator)}_create").to_s
             send("#{self.class.read_inheritable_attribute(:uuid_column)}=", uuid)
           end

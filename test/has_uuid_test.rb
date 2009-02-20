@@ -12,4 +12,22 @@ class HasUuidTest < Test::Unit::TestCase
     @widget.reload
     assert_nothing_raised { UUID.parse(@widget.uuid) }
   end
+  
+  def test_should_not_assign_uuid_if_already_set
+    test_uuid = UUID.random_create.to_s
+    @widget = Widget.new(:uuid => test_uuid)
+    @widget.save
+    @widget.reload
+    assert_equal(test_uuid, @widget.uuid)
+  end
+  
+  # should eventually do this
+  # def test_should_assign_uuid_if_invalid
+  #   @widget = Widget.new(:uuid => "not a uuid")
+  #   @widget.save
+  #   @widget.reload
+  #   puts @widget.uuid
+  #   assert_nothing_raised { UUID.parse(@widget.uuid) }
+  # end
+  
 end
