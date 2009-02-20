@@ -10,10 +10,28 @@ class HasUuidTest < Test::Unit::TestCase
     @widget = Widget.new
     @widget.assign_uuid
     assert_nothing_raised { UUID.parse(@widget.uuid) }
+    
+    @widget = Widget.new(:uuid => "")
+    @widget.assign_uuid
+    assert_nothing_raised { UUID.parse(@widget.uuid) }
+    
+    @widget = Widget.new(:uuid => "foo")
+    @widget.assign_uuid
+    assert_raises(ArgumentError) { UUID.parse(@widget.uuid) }
   end
   
   def test_method_assign_uuid!
     @widget = Widget.new
+    @widget.assign_uuid!
+    @widget.reload
+    assert_nothing_raised { UUID.parse(@widget.uuid) }
+    
+    @widget = Widget.new(:uuid => "")
+    @widget.assign_uuid!
+    @widget.reload
+    assert_nothing_raised { UUID.parse(@widget.uuid) }
+    
+    @widget = Widget.new(:uuid => "foo")
     @widget.assign_uuid!
     @widget.reload
     assert_nothing_raised { UUID.parse(@widget.uuid) }
@@ -41,6 +59,17 @@ class HasUuidTest < Test::Unit::TestCase
     @widget.save
     @widget.reload
     assert_equal(test_uuid, @widget.uuid)
+  end
+  
+  def test_should_always_assign_uuid_when_forced
+    original_uuid = UUID.random_create.to_s
+    @widget = Widget.new(:uuid => original_uuid)
+    @widget.assign_uuid(:force => true)
+    test_uuid = @widget.uuid
+    @widget.save
+    @widget.reload
+    assert_equal(test_uuid, @widget.uuid)
+    assert_not_equal(original_uuid, @widget.uuid)
   end
   
   # should eventually do this

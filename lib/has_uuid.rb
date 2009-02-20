@@ -39,14 +39,19 @@ module ActiveRecord #:nodoc:
       end
 
       module InstanceMethods #:nodoc:
-          def assign_uuid
-            return unless uuid.blank?
+          def assign_uuid(options = {})
+            
+            # default options
+            { :force => false }.merge!(options)
+            
+            return if uuid_valid? unless options[:force]
+            
             uuid = UUID.send("#{self.class.read_inheritable_attribute(:uuid_generator)}_create").to_s
             send("#{self.class.read_inheritable_attribute(:uuid_column)}=", uuid)
           end
         
           def assign_uuid!
-            assign_uuid
+            assign_uuid(:force => true)
             save!
           end
           
