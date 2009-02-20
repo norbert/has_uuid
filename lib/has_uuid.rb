@@ -49,6 +49,18 @@ module ActiveRecord #:nodoc:
             assign_uuid
             save!
           end
+          
+          def uuid_valid?
+            begin
+              UUID.parse(uuid).kind_of? UUID
+            rescue ArgumentError
+              false
+            end
+          end
+          
+          def uuid_invalid?
+            !uuid_valid?
+          end
       end
     end
   end
