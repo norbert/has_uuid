@@ -9,6 +9,7 @@ class HasUuidTest < Test::Unit::TestCase
     @widget = Widget.new
     assert_nil @widget.uuid
     @widget.save
+    @widget.reload
     assert_nothing_raised { UUID.parse(@widget.uuid) }
   end
 end
