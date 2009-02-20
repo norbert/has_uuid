@@ -74,4 +74,19 @@ class HasUuidTest < Test::Unit::TestCase
     assert_not_equal(original_uuid, @widget.uuid)
   end
   
+  def test_uuid_should_be_reassignable
+    @widget = Widget.new
+    @widget.save
+    @widget.reload
+    assert @widget.uuid_valid?
+    
+    new_uuid = UUID.random_create.to_s
+    @widget.uuid = new_uuid
+    @widget.save
+    @widget.reload
+    assert @widget.uuid_valid?
+    assert_equal(new_uuid, @widget.uuid)
+  end
+
+  
 end
