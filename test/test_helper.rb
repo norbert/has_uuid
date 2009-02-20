@@ -8,5 +8,8 @@ silence_stream(STDOUT) do
     create_table :widgets do |t|
       t.string :uuid
     end
+    create_table :thingies do |t|
+      t.string :uuid
+    end
   end
 end

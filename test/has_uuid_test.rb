@@ -4,6 +4,10 @@ class Widget < ActiveRecord::Base
   has_uuid
 end
 
+class Thingy < ActiveRecord::Base
+  has_uuid :auto => false
+end
+
 class HasUuidTest < Test::Unit::TestCase
   
   def test_method_assign_uuid
@@ -86,6 +90,15 @@ class HasUuidTest < Test::Unit::TestCase
     @widget.reload
     assert @widget.uuid_valid?
     assert_equal(new_uuid, @widget.uuid)
+  end
+  
+  
+  
+  def test_uuids_should_not_autoassign
+    @thingy = Thingy.new
+    @thingy.save
+    @thingy.reload
+    assert_nil @thingy.uuid
   end
 
   

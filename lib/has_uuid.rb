@@ -21,16 +21,19 @@ module ActiveRecord #:nodoc:
       module ClassMethods
         # Configuration options are:
         #
+        # * +auto+ - specifies whether the plugin should auto-generate UUIDs on create
         # * +generator+ - sets the UUID generator. Possible values are <tt>:random</tt> for version 4 (default) and <tt>:timestamp</tt> for version 1.
         # * +column+ - specifies the column in which to store the UUID (default: +uuid+).
         def has_uuid(options = {})
-          options.reverse_merge!(:generator => :random, :column => :uuid)
+          options.reverse_merge!(:auto => true, :generator => :random, :column => :uuid)
           raise ArgumentError unless GENERATORS.include?(options[:generator])
 
           class_eval do
             send :include, InstanceMethods # hide include from RDoc
-
-            before_validation_on_create :assign_uuid
+            
+            if options[:auto]
+              before_validation_on_create :assign_uuid
+            end
 
             write_inheritable_attribute :uuid_generator, options[:generator]
             write_inheritable_attribute :uuid_column, options[:column]
