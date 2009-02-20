@@ -58,7 +58,7 @@ module ActiveRecord #:nodoc:
           def uuid_valid?
             begin
               UUID.parse(uuid).kind_of? UUID
-            rescue ArgumentError
+            rescue ArgumentError, TypeError
               false
             end
           end
