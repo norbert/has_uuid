@@ -1,7 +1,46 @@
-= has_uuid
+[has_uuid](http://github.com/tfe/has_uuid/)
+========
 
-This plugin makes assigning a UUID (1) to your models a breeze. It depends on the uuidtools (2) gem.
+Provides automated [UUID](http://en.wikipedia.org/wiki/Universally_Unique_Identifier) generation for ActiveRecord objects. UUIDs are created after validations on create. Some configuration options are provided if you want to keep your UUIDs in a column other than "uuid" or if you want to use a different UUID generator (default is to generate version 4 UUIDs).
+
+Depends on the [uuidtools gem](http://github.com/sporkmonger/uuidtools/).
+
+Installation
+------------
+
+	script/plugin install git://github.com/tfe/has_uuid.git
+
+Usage
+-----
+
+	class Post < ActiveRecord::Base
+		has_uuid
+	end
+	
+	class User < ActiveRecord::Base
+		has_uuid :column => :token, :generator => :timestamp
+	end
 
 
-(1):: http://en.wikipedia.org/wiki/Universally_Unique_Identifier
-(2):: http://sporkmonger.com/projects/uuidtools
+Credit
+------
+This was written almost completely by [norbert](http://github.com/norbert/), and I just expanded upon it. [joergbattermann](http://github.com/joergbattermann/) also contributed.
+
+
+Todo
+----
+
+* It would be cool if the plugin included a migration to add the UUID column. Also: a rake task to run the migration on user-specified table(s).  A migration generator would also work and may be better-suited.
+* Provide a rake task for easily assigning UUIDs to existing data.
+* See [`active_record_uuid`](http://github.com/gabrielg/active_record_uuid/) for examples of the above.
+
+Contact
+-------
+
+Problems, comments, and pull requests all welcome. [Find me on GitHub.](http://github.com/tfe/)
+
+
+----
+
+Modifications copyright (c) 2009 [Todd Eichel](http://toddeichel.com/) for [Fooala, Inc.](http://opensource.fooala.com/), released under the MIT license.
+
