@@ -28,7 +28,7 @@ module ActiveRecord #:nodoc:
 
           if options[:auto]
             # always applies to subclasses
-            before_validation_on_create :assign_uuid
+            before_validation(:on => :create) { assign_uuid }
           end
 
           class_inheritable_reader :uuid_column
