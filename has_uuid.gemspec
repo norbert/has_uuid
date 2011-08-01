@@ -7,11 +7,9 @@ Gem::Specification.new do |s|
   s.version     = HasUuid::VERSION
   s.authors     = ["Timo Rößner"]
   s.email       = ["timo.roessner@googlemail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/troessner/has_uuid"
   s.summary     = %q{The has_uuid gem adds a UUID to your AR models.}
   s.description = %q{The has_uuid gem adds a UUID to your AR models. See the README for details.}
-
-  s.rubyforge_project = "has_uuid"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
