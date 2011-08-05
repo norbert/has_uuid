@@ -39,6 +39,11 @@ module ActiveRecord #:nodoc:
         end
       end
 
+      def generate_uuid
+        UUIDTools::UUID.send("#{uuid_generator}_create").to_s
+      end
+
+
       module InstanceMethods #:nodoc:
         def assign_uuid(options = {})
           return if uuid_valid? unless options[:force]
