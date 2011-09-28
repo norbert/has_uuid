@@ -31,11 +31,11 @@ module ActiveRecord #:nodoc:
             before_validation(:on => :create) { assign_uuid }
           end
 
-          class_inheritable_reader :uuid_column
-          write_inheritable_attribute :uuid_column, options[:column]
+          class_attribute :uuid_column
+          self.uuid_column = options[:column]
 
-          class_inheritable_reader :uuid_generator
-          write_inheritable_attribute :uuid_generator, options[:generator]
+          class_attribute :uuid_generator
+          self.uuid_generator = options[:generator]
         end
       end
 
