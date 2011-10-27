@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/troessner/has_uuid.png)](http://travis-ci.org/troessner/has_uuid)
+
 has_uuid
 ========
 
