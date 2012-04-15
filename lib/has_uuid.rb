@@ -28,16 +28,21 @@ module ActiveRecord #:nodoc:
 
           if options[:auto]
             # always applies to subclasses
-            before_validation_on_create :assign_uuid
+            before_validation(:on => :create) { assign_uuid }
           end
 
-          class_inheritable_reader :uuid_column
-          write_inheritable_attribute :uuid_column, options[:column]
+          class_attribute :uuid_column
+          self.uuid_column = options[:column]
 
-          class_inheritable_reader :uuid_generator
-          write_inheritable_attribute :uuid_generator, options[:generator]
+          class_attribute :uuid_generator
+          self.uuid_generator = options[:generator]
         end
       end
+
+      def generate_uuid
+        UUIDTools::UUID.send("#{uuid_generator}_create").to_s
+      end
+
 
       module InstanceMethods #:nodoc:
         def assign_uuid(options = {})

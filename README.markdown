@@ -1,16 +1,32 @@
+[![Build Status](https://secure.travis-ci.org/troessner/has_uuid.png)](http://travis-ci.org/troessner/has_uuid)
+
 has_uuid
 ========
 
-[has_uuid](http://github.com/norbert/has_uuid) provides basic [UUID](http://en.wikipedia.org/wiki/Universally_Unique_Identifier) assignment methods for ActiveRecord objects.
+[has_uuid](http://github.com/troessner/has_uuid) provides basic [UUID](http://en.wikipedia.org/wiki/Universally_Unique_Identifier) assignment methods for ActiveRecord objects.
 
 It depends on the [uuidtools](http://uuidtools.rubyforge.org/) gem.
 
+This is a fork - full credits for the source code go to [has_uuid](http://github.com/norbert/has_uuid).
+
+What I changed:
+
+a) Made it rails 3.1 compatible.
+
+b) Bundler'ized it - you can now use and manage it as a gem, not as a rails plugin.
+
+c) Added generate_uuid as a class method
 
 Installation
 ------------
 
-	script/plugin install git://github.com/norbert/has_uuid.git
+Add
 
+>> gem 'has_uuid'
+
+to your Gemfile and run
+
+>> bundle install
 
 Usage
 -----
@@ -42,6 +58,8 @@ Usage
 	# check if the current UUID is valid
 	@post.uuid_valid?
 
+	# Generate a UUID to use it later
+	Post.generate_uuid
 
 Credits
 -------

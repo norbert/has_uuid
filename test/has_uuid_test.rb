@@ -9,6 +9,11 @@ class Thingy < ActiveRecord::Base
 end
 
 class HasUuidTest < Test::Unit::TestCase
+  def test_should_generate_a_valid_uuid
+    uuid = Widget.generate_uuid
+    assert UUIDTools::UUID.parse(uuid).kind_of?(UUIDTools::UUID)
+  end
+
   def test_should_assign_uuid
     @widget = Widget.new
     @widget.assign_uuid
